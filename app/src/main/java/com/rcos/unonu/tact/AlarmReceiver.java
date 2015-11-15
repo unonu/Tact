@@ -6,7 +6,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.SystemClock;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -19,11 +21,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         Intent service = new Intent(context, SchedulingService.class);
         startWakefulService(context, service);
-
+        Log.d("ALARM", "onReceive for alarm receive");
     }
 
     public void setAlarm(Context context) {
@@ -33,14 +34,13 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 30);
 
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                calendar.getTimeInMillis(),
-                5*60*1000,
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis() + 20,
+                60 * 1000,
                 alarmIntent);
 
+        Log.d("ALARM", "setAlarm in alarm");
         // Enable {@code SampleBootReceiver} to automatically restart the alarm when the
         // device is rebooted.
         ComponentName receiver = new ComponentName(context, BootReceiver.class);
