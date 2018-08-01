@@ -1,5 +1,5 @@
 # Tact
-Hack RPI 2015 entry by Chris Vecchio, ALwin Joy, Jonathan Yax and Andrew Cage
+Hack RPI 2015 entry by Chris Vecchio, Alwin Joy, Jonathan Yax and Andrew Cage
 
 # Idea
 Tact is an app that automatically adjusts your ringtone volume
